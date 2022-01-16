@@ -346,6 +346,11 @@ public class UniversityApplication extends javax.swing.JFrame {
         modifyCourseButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         modifyCourseButton.setText("Modify");
         modifyCourseButton.setEnabled(false);
+        modifyCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyCourseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCourseLayout = new javax.swing.GroupLayout(jPanelCourse);
         jPanelCourse.setLayout(jPanelCourseLayout);
@@ -545,7 +550,7 @@ public class UniversityApplication extends javax.swing.JFrame {
         lec.setLName(lecturerLNameTextField.getText());
         lec.setGender((String)lecturerGenderComboBox.getSelectedItem());
         //add lecturer to the list
-        Functions.addElelemntToList(lecturerList, lec.toString(lec));
+        Functions.addElelemntToList(lecturerList, lec);
         
 //        DefaultListModel dl = new DefaultListModel();
 //         ListModel l = lecturerList.getModel();
@@ -612,11 +617,28 @@ public class UniversityApplication extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int index = courseList.getSelectedIndex(); 
-        if (index >=0)
-        {System.out.println("Index is="+courseList.getSelectedIndex());
-         deleteCourseButton.setEnabled(true);
-            
-        }
+        
+        
+        
+             DefaultListModel dl = new DefaultListModel(); 
+             ListModel lm = courseList.getModel();
+
+            for (int i = 0; i<=index; i++){
+
+                courseNumberTextField.setText((lm.getElementAt(i).toString().split(" ")[0]));
+                courseNameTextField.setText((lm.getElementAt(i).toString().split(" ")[1])); 
+                System.out.println(i);
+                   deleteCourseButton.setEnabled(true);
+                modifyCourseButton.setEnabled(true);
+                }
+//        if (index >=0)
+//        {System.out.println("Index is="+courseList.getSelectedIndex());
+//         deleteCourseButton.setEnabled(true);
+//        modifyCourseButton.setEnabled(true);
+//        
+//  
+//        }
+        
         
     }//GEN-LAST:event_courseListValueChanged
 
@@ -632,6 +654,34 @@ public class UniversityApplication extends javax.swing.JFrame {
             }
          courseList.setModel(dl);
     }//GEN-LAST:event_deleteCourseButtonActionPerformed
+
+    private void modifyCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyCourseButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel dl = new DefaultListModel(); 
+        ListModel lm = courseList.getModel();
+        int index = courseList.getSelectedIndex();
+        System.out.println(index);
+         String courseNumber =   courseNumberTextField.getText();
+         String courseName =   courseNameTextField.getText();
+               dl.setElementAt(courseNumber, index);
+
+            dl.setElementAt(courseName, index);
+//        for (int i = 0; i<index; i++){
+//            String courseNumber =   courseNumberTextField.getText();
+//            String courseName =   courseNameTextField.getText();
+//
+//
+//            dl.setElementAt(courseNumber, i);
+//
+//            dl.setElementAt(courseName, i);
+//
+//
+//            }
+
+                 courseList.repaint();
+
+
+    }//GEN-LAST:event_modifyCourseButtonActionPerformed
    
     /**
      * @param args the command line arguments

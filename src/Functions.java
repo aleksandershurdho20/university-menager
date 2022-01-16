@@ -15,12 +15,20 @@ import javax.swing.ListModel;
  */
 public class Functions {
    
-//    static String myMethod(Object obj){
-//    
-//        System.out.println("Parsing object wiht this functio nhere");
-//    }
+    static String parseObject(Object obj){
+     
+
+        
+        if (obj instanceof Student) {
+            return ((Student) obj).toString((Student) obj);
+        } else if (obj instanceof Lecturer) {
+            return ((Lecturer) obj).toString((Lecturer) obj); 
+        } else {
+            return obj.toString(); 
+        }        
+    }
+
      public static void addElelemntToList(JList list,Object obj ){
-         
          DefaultListModel dl = new DefaultListModel();
          ListModel l = list.getModel();
          System.out.println("lista ka "+l.getSize()+ " elements");
@@ -30,7 +38,8 @@ public class Functions {
              System.out.println("elementi qe shtohet "+l.getElementAt(i).toString());
          }
          System.out.println(obj);
-         dl.addElement(obj);
+         dl.addElement(Functions.parseObject(obj)); 
+  
 //         d1.addElement(myMethod(obj));
          list.setModel(dl);
      
