@@ -656,30 +656,23 @@ public class UniversityApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteCourseButtonActionPerformed
 
     private void modifyCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyCourseButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultListModel dl = new DefaultListModel(); 
+  
         ListModel lm = courseList.getModel();
         int index = courseList.getSelectedIndex();
+        if (index == -1) {
+            return;
+        }
+
         System.out.println(index);
-         String courseNumber =   courseNumberTextField.getText();
-         String courseName =   courseNameTextField.getText();
-               dl.setElementAt(courseNumber, index);
+        String courseNumber = courseNumberTextField.getText();
+        String courseName = courseNameTextField.getText();
 
-            dl.setElementAt(courseName, index);
-//        for (int i = 0; i<index; i++){
-//            String courseNumber =   courseNumberTextField.getText();
-//            String courseName =   courseNameTextField.getText();
-//
-//
-//            dl.setElementAt(courseNumber, i);
-//
-//            dl.setElementAt(courseName, i);
-//
-//
-//            }
+        ListModel<String> jlm = this.courseList.getModel();
+        DefaultListModel<String> df2 = (DefaultListModel) jlm;
+        df2.getElementAt(index);
+        df2.setElementAt(courseNumber + " " + courseName, index);
 
-                 courseList.repaint();
-
+        courseList.repaint();
 
     }//GEN-LAST:event_modifyCourseButtonActionPerformed
    
